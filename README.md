@@ -1,8 +1,8 @@
-#PAPI-Google (Pydrive Wrapper)
+# PAPI-Google (Pydrive Wrapper)
 Python API for Google - This makes life a lot easier than the vanilla api commands
 
 
-#The Functions and their Parameters:
+# The Functions and their Parameters:
 ## Exploring the Filesystem
 ###### List Files in Directory (By id)
 `list_drive_directory(id=None)`
