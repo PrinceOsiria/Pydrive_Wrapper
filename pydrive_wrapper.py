@@ -11,6 +11,11 @@
 # Thank you for taking a look at my work! I appreciate it greatly!
 # Tyler Pryjda
 
+
+# ALSO - Be sure you have created a service account and have downloaded it's private key. Also, you will likely have to enable
+# The APIs in google cloud - the ones to activate can be seen in the scopes, under configuration
+
+
 ###########################################################################################################################################
 ##################################################### Imports #############################################################################
 ###########################################################################################################################################
