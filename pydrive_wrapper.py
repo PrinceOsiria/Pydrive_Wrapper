@@ -43,7 +43,7 @@ docs = service.documents()
 ##################################################### Functions ###########################################################################
 ###########################################################################################################################################
 # Download Drive Files from Directory
-def download_drive_dir_files(id=None, file_identifier="File Number"):
+def download_drive_dir_files(id=None):
 
 	# Fetch Directory Contents
   file_list = list_drive_directory(id=id)
