@@ -1,4 +1,17 @@
 ###########################################################################################################################################
+##################################################### Notes ###############################################################################
+###########################################################################################################################################
+
+# PAPI-Google © 2021 by Tyler Pryjda is licensed under CC BY-ND 4.0
+
+# Note: I have chosen to disallow derivitives as I wish to continue work on this alone (I am open to collaboration), at my own pace, and
+# don't want to see it cloned and improved without a chance to do the missing work on my own. You are permitted to use this as you wish,
+# but if it is referenced anywhere online, please note that a link to the page's repo is required with the above license.
+
+# Thank you for taking a look at my work! I appreciate it greatly!
+# Tyler Pryjda
+
+###########################################################################################################################################
 ##################################################### Imports #############################################################################
 ###########################################################################################################################################
 # Local Filesystem Configuration
