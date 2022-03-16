@@ -33,12 +33,17 @@ NOTE: The below functions have a "files" parameter - this can be retrieved using
 
 ###### Query Drive
 Note: This is the same thing as the normal api calls, except the result is extremely streamlined - For more detail, use the `get_drive_file` function instead
+
 `query_drive(query)`
+
+
 
 
 ## "Getting" Files
 Note: this returns the file in the same format as the regular api
+
 `get_drive_file(id=None)`
+
 
 
 
@@ -49,6 +54,7 @@ Note: this returns the file in the same format as the regular api
 
 ###### Download file via id
 `download_drive_file(id=None, file_name=None, directory=None)`
+
 
 
 
@@ -65,6 +71,7 @@ Note: this returns the file in the same format as the regular api
 
 
 
+
 ## Deleting Files
 Disclaimer: I have no idea why, but deleting a file on it's own is proving difficult. Deletion of folders works out just fine however
 
@@ -74,6 +81,7 @@ Disclaimer: I have no idea why, but deleting a file on it's own is proving diffi
 
 ###### Trash a Folder (via id):
 `trash_drive_folder(id=None)`
+
 
 
 
@@ -91,6 +99,7 @@ Disclaimer: I have no idea why, but deleting a file on it's own is proving diffi
 
 
 
+
 ## Editing Files
 ###### Rename Docs File
 `rename_drive_document(id=None,title=None)`
@@ -98,6 +107,7 @@ Disclaimer: I have no idea why, but deleting a file on it's own is proving diffi
 
 ###### Insert text to document (hyperlinks supported)
 `insert_text_to_drive_document(id=None, text=None, index=1, link=None, font="Anonymous Pro", font_size=30)`
+
 
 
 
