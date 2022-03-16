@@ -15,6 +15,8 @@
 # ALSO - Be sure you have created a service account and have downloaded it's private key. Also, you will likely have to enable
 # The APIs in google cloud - the ones to activate can be seen in the scopes, under configuration
 
+# LASTLY - this wrapper depends on pydrive, another wrapper which is specifically built for drive, but is no longer maintained
+
 
 ###########################################################################################################################################
 ##################################################### Imports #############################################################################
