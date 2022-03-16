@@ -65,7 +65,7 @@ Note: this returns the file in the same format as the regular api
 ###### Create a Document
 `create_drive_document(title=None, parent_id=None)`
 
-######Create a Document from a Template
+###### Create a Document from a Template
 `create_document_from_template(template_id=None, batch_update=None, target_directory=None, file_title=None)`
 
 
