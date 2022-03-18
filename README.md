@@ -39,11 +39,15 @@ Note: This is the same thing as the normal api calls, except the result is extre
 
 
 
-## "Getting" Files
+## Reading Files
 Note: this returns the file in the same format as the regular api
-
+###### Read Drive File
 `get_drive_file(id=None)`
 
+
+
+###### Reading Ranges in Sheets
+`get_sheets_range(id=None, range=None, major_dimension=None)`
 
 
 
@@ -109,6 +113,8 @@ Disclaimer: I have no idea why, but deleting a file on it's own is proving diffi
 `insert_text_to_drive_document(id=None, text=None, index=1, link=None, font="Anonymous Pro", font_size=30)`
 
 
+###### Editing Range in Sheets
+`write_sheets_range(id=None, range=None, value_input_option="USER_ENTERED", values=None)`
 
 
 ## Uploading Files
