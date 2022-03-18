@@ -17,10 +17,15 @@
 
 # LASTLY - this wrapper depends on pydrive, another wrapper which is specifically built for drive, but is no longer maintained
 
+# SIDE NOTE - You may notice, when adding images to documents using a batch update, it may fail with a "access forbidden" error.
+# This is an error in the docs API, and can be solved with a try except loop. It's not glamourous, but it works, if encountered
+
+
 
 ###########################################################################################################################################
 ##################################################### Imports #############################################################################
 ###########################################################################################################################################
+
 # Local Filesystem Configuration
 private_key_location = 
 workspace_location = 
@@ -36,6 +41,7 @@ import google.auth
 ###########################################################################################################################################
 ##################################################### Configuration #######################################################################
 ###########################################################################################################################################
+
 # Authentication
 gauth = GoogleAuth()
 scope = [
@@ -47,9 +53,12 @@ service = build('docs', 'v1', credentials=gauth.credentials)
 drive = GoogleDrive(gauth)
 docs = service.documents()
 
+
+
 ###########################################################################################################################################
 ##################################################### Functions ###########################################################################
 ###########################################################################################################################################
+
 # Download Drive Files from Directory
 def download_drive_dir_files(id=None):
 
@@ -83,6 +92,7 @@ def list_drive_directory(id=None):
   return query_drive(f"'{id}' in parents")
 
 
+
 # Create Drive Folder
 def create_drive_folder(id=None, title=None):
   file = drive.CreateFile({
@@ -94,16 +104,20 @@ def create_drive_folder(id=None, title=None):
   return file["id"]
 
 
+
 # Trash Drive Folder
 def trash_drive_folder(id=None):
   file = drive.CreateFile({'id':id})
   file.Trash()
 
 
+
 # Delete Drive Folder
 def delete_drive_folder(id=None):
   file = drive.CreateFile({'id':id})
   file.Delete()
+
+
 
 # Copy Drive File
 def copy_drive_file(file_id=None, copy_title=None):
@@ -112,11 +126,14 @@ def copy_drive_file(file_id=None, copy_title=None):
 
   return file_data['id']
 
+
+
 # Copy Drive File to Folder
 def copy_drive_file_to_folder(file_id=None, copy_title=None, parent_id=None):
   copy_id = copy_drive_file(file_id=file_id,copy_title=copy_title)
   #move_drive_file(file_id=copy_id, parent_id=parent_id)
   return copy_id
+
 
 
 # Move Drive File
@@ -132,12 +149,14 @@ def move_drive_file(file_id=None, parent_id=None):
   return file["id"]
 
 
+
 # Get Drive File
 def get_drive_file(id=None):
   file = drive.CreateFile()
   file['id'] = id
   file.Upload()
   return file
+
 
 
 # Download Drive File
@@ -160,6 +179,7 @@ def check_files_for_title(files=None,title=None):
     )
 
 
+
 # Check listing of files for a matching id
 def check_files_for_id(files=None,id=None):
   if id in files["ids"]:
@@ -172,6 +192,7 @@ def check_files_for_id(files=None,id=None):
     )
 
 
+
 # Get file title
 def get_titles_from_fileList(fileList):
   titles = []
@@ -181,6 +202,7 @@ def get_titles_from_fileList(fileList):
   return titles
 
   
+
 # Get file id
 def get_ids_from_fileList(fileList):
   ids = []
@@ -189,13 +211,17 @@ def get_ids_from_fileList(fileList):
       ids.append(file["id"])
   return ids
 
-  # Get file mime
+
+
+# Get file mime
 def get_mimes_from_fileList(fileList):
   mimes = []
   for file in fileList:
     if file["mimeType"]:
       mimes.append(file["mimeType"])
   return mimes
+
+
 
 # Query drive & Internalize the results
 def query_drive(query):
@@ -206,6 +232,8 @@ def query_drive(query):
     ids = get_ids_from_fileList(fileList),
     mimeTypes = get_mimes_from_fileList(fileList)
     )
+
+
 
 # Create Document
 def create_drive_document(title=None, parent_id=None):
@@ -218,6 +246,7 @@ def create_drive_document(title=None, parent_id=None):
   return file["id"]
   
 
+
 # Rename Document
 def rename_drive_document(id=None,title=None):
   files = drive.auth.service.files()
@@ -228,6 +257,7 @@ def rename_drive_document(id=None,title=None):
     body=file,
     newRevision=True
     ).execute()
+
 
 
 # Insert Text to Document
@@ -285,6 +315,7 @@ def insert_text_to_drive_document(id=None, text=None, index=1, link=None, font="
   docs.batchUpdate(documentId=id,body={'requests': content}).execute()
 
 
+
 # Upload Files
 def upload_file_to_drive(file=None, directory=None, parent_id=None, file_name=None):
   file = drive.CreateFile({'title': file_name})
@@ -299,6 +330,37 @@ def create_document_from_template(template_id=None, batch_update=None, target_di
   file = copy_drive_file_to_folder(file_id=template_id, parent_id=target_directory, copy_title=file_title)
   docs.batchUpdate(documentId=file, body={'requests': batch_update}).execute()
   return file
+
+
+
+# Get Text in a Range using A1 Notation
+def get_sheets_range(id=None, range=None, major_dimension=None):
+  
+  # Fetch the Range
+  result = sheets.values().get(
+    spreadsheetId = id, 
+    range=range, 
+    majorDimension=major_dimension
+  ).execute()
+  
+  # Return the Results
+  return result.get("values", [])
+
+
+
+# Write Text in a Range using A1 Notation
+def write_sheets_range(id=None, range=None, value_input_option="USER_ENTERED", values=None):
+
+  # Update the Range
+  result = sheets.values().update(
+    spreadsheetId = id, 
+    range = range, valueInputOption=value_input_option, 
+    body = {'values':values}
+  ).execute()
+
+  # Return the Results
+  return result
+
 
 
 # This stupid #### must be run first - otherwise certain (if not all) api features will not work
