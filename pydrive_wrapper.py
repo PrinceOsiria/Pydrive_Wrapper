@@ -49,9 +49,11 @@ scope = [
  ,'https://www.googleapis.com/auth/documents'
  ,'https://www.googleapis.com/auth/spreadsheets']
 gauth.credentials = ServiceAccountCredentials.from_json_keyfile_name(private_key_location, scope)
-service = build('docs', 'v1', credentials=gauth.credentials)
 drive = GoogleDrive(gauth)
-docs = service.documents()
+docs_service = build('docs', 'v1', credentials=gauth.credentials)
+docs = docs_service.documents()
+sheets_service = build('sheets', 'v4', credentials=gauth.credentials)
+sheets = sheets_service.spreadsheets()
 
 
 
